@@ -58,12 +58,12 @@ agent = DQN(state_dim=X_train.shape[1], action_dim=X_train.shape[1], buffer_size
             batch_size=args.batch_size, epsilon=args.epsilon, gamma=args.gamma, lr=args.lr)
 
 episode = 0
-tmp = np.zeros(10)  # 用于记录每个num_percent第一次出现的时间
+tmp = np.zeros(10)  
 best_percent = 0
 end_time_best = 0
 start_time0 = time.time()
-agent.epsilon = 1.0  # 在训练初期进行更多的探索
-epsilon_decay = 0.995  # 衰减率
+agent.epsilon = 1.0  
+epsilon_decay = 0.995  
 min_epsilon = 0.01
 
 best_eva = 0
@@ -120,8 +120,8 @@ while 1:
         X_tensor = torch.tensor(X, dtype=torch.float32).cuda()
         out = agent.model(X_tensor)
         return out
-    num_features = X_train.shape[1]  # 获取特征数量
-    X_full_1 = np.ones(num_features)  # 创建全1的输入向量
+    num_features = X_train.shape[1]  
+    X_full_1 = np.ones(num_features)  
     out_train = get_dqn_output(agent, X_full_1)
     # out_train = get_dqn_output(agent, X_train[0])
     def get_key_features_by_q_values(out, top_k):
@@ -132,8 +132,7 @@ while 1:
         return key_features_top_k
     key_features = get_key_features_by_q_values(out_train, 15)
 
-    # key_features, featur_impacts = agent.get_key_features_withQ()
-    # key_features = key_features[:15]
+
     action_list = key_features
     # length = len(action_list)
     print(f"key_features: {key_features}")
@@ -143,11 +142,7 @@ while 1:
     sum_eva_13 = 0
     sum_eva_14 = 0
     sum_eva_15 = 0
-    # sum_eva_16 = 0
-    # sum_eva_17 = 0
-    # sum_eva_18 = 0
-    # sum_eva_19 = 0
-    # sum_eva_20 = 0
+
 
     
     
